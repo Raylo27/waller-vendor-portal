@@ -1,16 +1,16 @@
 # Next Steps
 
 ## Soft tasks to finish before coding
-- [ ] Finalize product spec summary
-- [ ] Finalize demo script summary
-- [ ] Finalize outreach notes
-- [ ] Create one master build handoff note for Claude
+- [x] Finalize product spec summary
+- [x] Finalize demo script summary
+- [x] Finalize outreach notes
+- [x] Create one master build handoff note for Claude
 - [ ] Confirm what is in scope for MVP
 - [ ] Confirm what is intentionally mocked or simplified
-- [ ] Confirm exact tech stack
-- [ ] Confirm naming and branding language
-- [ ] Confirm pilot positioning language
-- [ ] Confirm what the first build milestone is
+- [x] Confirm exact tech stack
+- [x] Confirm naming and branding language
+- [x] Confirm pilot positioning language
+- [x] Confirm what the first build milestone is
 
 ## Build handoff goal
 Claude should be able to read the repo docs and immediately begin implementation without needing the full conversation history.
