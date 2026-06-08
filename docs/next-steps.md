@@ -5,8 +5,8 @@
 - [x] Finalize demo script summary
 - [x] Finalize outreach notes
 - [x] Create one master build handoff note for Claude
-- [ ] Confirm what is in scope for MVP
-- [ ] Confirm what is intentionally mocked or simplified
+- [x] Confirm what is in scope for MVP
+- [x] Confirm what is intentionally mocked or simplified
 - [x] Confirm exact tech stack
 - [x] Confirm naming and branding language
 - [x] Confirm pilot positioning language
