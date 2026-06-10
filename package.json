@@ -1,7 +1,13 @@
 {
-  "name": "waller-vendor-portal",
+  "name": "server",
   "version": "1.0.0",
-  "prisma": {
-    "seed": "node prisma/seed.js"
-  }
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
