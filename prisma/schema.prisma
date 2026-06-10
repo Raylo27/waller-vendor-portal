@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  vendors     Vendor[] @relation("VendorCategories")
+}
+
+model StaffUser {
+  id            String        @id @default(uuid())
+  name          String
+  email         String        @unique
+  password      String
+  role          String        @default("Staff")
+  createdAt     DateTime      @default(now())
+  opportunities Opportunity[]
+}
+
+model Vendor {
+  id            String       @id @default(uuid())
+  vendorId      String       @unique
+  businessName  String
+  contactName   String
+  email         String       @unique
+  phone         String
+  address       String
+  businessType  String
+  ein           String
+  status        String       @default("Active")
+  createdAt     DateTime     @default(now())
+  categories    Category[]   @relation("VendorCategories")
+  submissions   Submission[]
+}
+
+model Opportunity {
+  id            String       @id @default(uuid())
+  oppId         String       @unique
+  title         String
+  type          String
+  category      String
+  description   String
+  requirements  String
+  deadline      DateTime
+  contactName   String
+  contactEmail  String
+  requiredDocs  String[]
+  status        String       @default("Published")
+  createdBy     String
+  createdAt     DateTime     @default(now())
+  staffUser     StaffUser    @relation(fields: [createdBy], references: [id])
+  submissions   Submission[]
+}
+
+model Submission {
+  id              String      @id @default(uuid())
+  referenceNumber String      @unique
+  opportunityId   String
+  vendorId        String
+  notes           String
+  bidAmount       Float?
+  documentNames   String[]
+  status          String      @default("New")
+  submittedAt     DateTime    @default(now())
+  opportunity     Opportunity @relation(fields: [opportunityId], references: [id])
+  vendor          Vendor      @relation(fields: [vendorId], references: [id])
+}

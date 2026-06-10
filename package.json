@@ -1,0 +1,7 @@
+{
+  "name": "waller-vendor-portal",
+  "version": "1.0.0",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}
