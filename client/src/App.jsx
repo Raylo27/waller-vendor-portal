@@ -1,121 +1,82 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// Vendor pages
+import VendorLogin from './pages/vendor/VendorLogin'
+import Homepage from './pages/vendor/Homepage'
+import Register from './pages/vendor/Register'
+import RegisterConfirm from './pages/vendor/RegisterConfirm'
+import Dashboard from './pages/vendor/Dashboard'
+import Opportunities from './pages/vendor/Opportunities'
+import OpportunityDetail from './pages/vendor/OpportunityDetail'
+import Submit from './pages/vendor/Submit'
+import SubmitConfirm from './pages/vendor/SubmitConfirm'
+
+// Staff pages
+import StaffLogin from './pages/staff/StaffLogin'
+import StaffDashboard from './pages/staff/StaffDashboard'
+import PostOpportunity from './pages/staff/PostOpportunity'
+import VendorRegistry from './pages/staff/VendorRegistry'
+import SubmissionsReview from './pages/staff/SubmissionsReview'
+
+// Auth
+import { AuthProvider } from './auth/AuthContext'
+import ProtectedRoute from './auth/ProtectedRoute'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public vendor routes */}
+          <Route path="/" element={<Homepage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<VendorLogin />} />
+          <Route path="/register/confirm" element={<RegisterConfirm />} />
+          <Route path="/opportunities" element={<Opportunities />} />
+          <Route path="/opportunities/:id" element={<OpportunityDetail />} />
 
-      <div className="ticks"></div>
+          {/* Protected vendor routes */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute allowedType="vendor">
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/opportunities/:id/submit" element={
+            <ProtectedRoute allowedType="vendor">
+              <Submit />
+            </ProtectedRoute>
+          } />
+          <Route path="/submit/confirm" element={
+            <ProtectedRoute allowedType="vendor">
+              <SubmitConfirm />
+            </ProtectedRoute>
+          } />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+          {/* Staff routes */}
+          <Route path="/staff/login" element={<StaffLogin />} />
+          <Route path="/staff/dashboard" element={
+            <ProtectedRoute allowedType="staff">
+              <StaffDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/staff/opportunities/new" element={
+            <ProtectedRoute allowedType="staff">
+              <PostOpportunity />
+            </ProtectedRoute>
+          } />
+          <Route path="/staff/vendors" element={
+            <ProtectedRoute allowedType="staff">
+              <VendorRegistry />
+            </ProtectedRoute>
+          } />
+          <Route path="/staff/submissions" element={
+            <ProtectedRoute allowedType="staff">
+              <SubmissionsReview />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
