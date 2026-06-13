@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import API_URL from '../../config/api'
 
 function OpportunityDetail() {
   const { id } = useParams()
@@ -8,7 +9,7 @@ function OpportunityDetail() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/opportunities/${id}`)
+    fetch(`${API_URL}/api/opportunities/${id}`)
       .then(res => res.json())
       .then(data => {
         setOpp(data)

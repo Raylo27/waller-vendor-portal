@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
+import API_URL from '../../config/api'
 
 function VendorLogin() {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ function VendorLogin() {
     setError('')
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/vendor/login', {
+      const res = await fetch(`${API_URL}/api/auth/vendor/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

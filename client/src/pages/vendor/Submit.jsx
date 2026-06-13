@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
+import API_URL from '../../config/api'
 
 function Submit() {
   const { id } = useParams()
@@ -16,7 +17,7 @@ function Submit() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/opportunities/${id}`)
+    fetch(`${API_URL}/api/opportunities/${id}`)
       .then(res => res.json())
       .then(data => setOpp(data))
   }, [id])
@@ -40,7 +41,7 @@ function Submit() {
     setError('')
 
     try {
-      const res = await fetch('http://localhost:5000/api/submissions', {
+      const res = await fetch(`${API_URL}/api/submissions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

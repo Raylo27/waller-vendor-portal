@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import API_URL from '../../config/api'
 
 const CATEGORIES = [
   'Construction and Infrastructure',
@@ -60,7 +61,7 @@ function Register() {
     setError('')
 
     try {
-      const res = await fetch('http://localhost:5000/api/vendors', {
+      const res = await fetch(`${API_URL}/api/vendors`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)

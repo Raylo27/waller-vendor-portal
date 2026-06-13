@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
+import API_URL from '../../config/api'
 
 function VendorRegistry() {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ function VendorRegistry() {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/vendors', {
+    fetch(`${API_URL}/api/vendors`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())

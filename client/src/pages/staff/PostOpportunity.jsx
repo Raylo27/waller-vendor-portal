@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
+import API_URL from '../../config/api'
 
 const CATEGORIES = [
   'Construction and Infrastructure',
@@ -59,7 +60,7 @@ function PostOpportunity() {
     const cleanDocs = form.requiredDocs.filter(d => d.trim() !== '')
 
     try {
-      const res = await fetch('http://localhost:5000/api/opportunities', {
+      const res = await fetch(`${API_URL}/api/opportunities`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

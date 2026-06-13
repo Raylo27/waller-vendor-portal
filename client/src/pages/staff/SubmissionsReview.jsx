@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
+import API_URL from '../../config/api'
 
 function SubmissionsReview() {
   const navigate = useNavigate()
@@ -11,15 +12,15 @@ function SubmissionsReview() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/opportunities')
+    fetch(`${API_URL}/api/opportunities`  )
       .then(res => res.json())
       .then(data => setOpportunities(data))
   }, [])
 
   useEffect(() => {
     const url = selectedOpp
-      ? `http://localhost:5000/api/submissions?opportunityId=${selectedOpp}`
-      : 'http://localhost:5000/api/submissions'
+      ? `${API_URL}/api/submissions?opportunityId=${selectedOpp}`
+      : `${API_URL}/api/submissions`    
 
     fetch(url, {
       headers: { 'Authorization': `Bearer ${token}` }
@@ -37,7 +38,7 @@ function SubmissionsReview() {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/submissions/${id}`, {
+      const res = await fetch(`${API_URL}/api/submissions/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

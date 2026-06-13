@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
+import API_URL from '../../config/api'
 
 function StaffLogin() {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ function StaffLogin() {
     setError('')
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/staff/login', {
+      const res = await fetch(`${API_URL}/api/auth/staff/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
